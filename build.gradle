@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'idea'
+    id 'application'
 }
 
 group 'com.tt.reactive'
@@ -14,4 +16,14 @@ repositories {
 dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.5.2"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.5.2"
+    compile "io.projectreactor:reactor-core:3.3.0.RELEASE"
+    testCompile "io.projectreactor:reactor-test:3.3.0.RELEASE"
+}
+
+ext {
+    javaMainClass = "com.tt.reactive.Main"
+}
+
+application {
+    mainClassName = javaMainClass
 }

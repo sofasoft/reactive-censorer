@@ -6,8 +6,9 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.Charset;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
 
-public class InsultGateway {
+class InsultGateway {
 
     private final HttpClient client;
 
@@ -16,7 +17,9 @@ public class InsultGateway {
             .build();
 
     public InsultGateway() {
-        client = HttpClient.newHttpClient();
+        client = HttpClient.newBuilder()
+                .executor(Executors.newFixedThreadPool(4))
+                .build();
     }
 
     public CompletableFuture<String> getAnotherInsult() {
