@@ -10,15 +10,16 @@ import java.util.concurrent.Executors;
 
 class InsultGateway {
 
-    private final HttpClient client;
-
+    private static final int N_THREADS = 4;
     private static final HttpRequest ANOTHER_INSULT_REQUEST = HttpRequest.newBuilder()
             .uri(URI.create("https://evilinsult.com/generate_insult.php?lang=en"))
             .build();
 
+    private final HttpClient client;
+
     public InsultGateway() {
         client = HttpClient.newBuilder()
-                .executor(Executors.newFixedThreadPool(4))
+                .executor(Executors.newFixedThreadPool(N_THREADS))
                 .build();
     }
 

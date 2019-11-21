@@ -12,7 +12,7 @@ public class InsultProcessor {
 
     public InsultProcessor() {
         insultFlux = Flux.interval(Duration.ofMillis(2100))
-                .flatMap( l ->Mono.fromFuture(gateway.getAnotherInsult()));
+                .flatMap(l -> Mono.fromFuture(gateway.getAnotherInsult()));
     }
 
     public Flux<String> getInsult() {
