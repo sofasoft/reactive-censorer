@@ -6,17 +6,21 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.Charset;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
 
-public class InsultGateway {
+class InsultGateway {
 
-    private final HttpClient client;
-
+    private static final int N_THREADS = 4;
     private static final HttpRequest ANOTHER_INSULT_REQUEST = HttpRequest.newBuilder()
             .uri(URI.create("https://evilinsult.com/generate_insult.php?lang=en"))
             .build();
 
+    private final HttpClient client;
+
     public InsultGateway() {
-        client = HttpClient.newHttpClient();
+        client = HttpClient.newBuilder()
+                .executor(Executors.newFixedThreadPool(N_THREADS))
+                .build();
     }
 
     public CompletableFuture<String> getAnotherInsult() {
