@@ -8,7 +8,7 @@ import java.nio.charset.Charset;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 
-class InsultGateway {
+public class InsultGateway {
 
     private static final int N_THREADS = 4;
     private static final HttpRequest ANOTHER_INSULT_REQUEST = HttpRequest.newBuilder()
