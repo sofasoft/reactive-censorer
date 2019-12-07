@@ -15,7 +15,7 @@ public class InsultProcessor {
         this(new InsultGateway());
     }
 
-    public InsultProcessor(InsultGateway insultGateway){
+    public InsultProcessor(InsultGateway insultGateway) {
         this.gateway = insultGateway;
         insultFlux = Flux.interval(Duration.ofMillis(2100))
                 .flatMap(l -> Mono.fromFuture(gateway.getAnotherInsult()));
