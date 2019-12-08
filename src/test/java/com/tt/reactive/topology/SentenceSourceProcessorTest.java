@@ -1,14 +1,11 @@
 package com.tt.reactive.topology;
 
-import com.tt.reactive.source.SentenceSource;
 import com.tt.reactive.source.io.BookSentenceExtractor;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import reactor.test.StepVerifier;
 
 import java.time.Duration;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SentenceSourceProcessorTest {
 
