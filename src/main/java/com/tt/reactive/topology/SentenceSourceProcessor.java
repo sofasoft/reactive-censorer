@@ -8,14 +8,15 @@ import java.time.Duration;
 
 public class SentenceSourceProcessor {
 
+    private static final Duration DEFAULT_INTERVAL = Duration.ofMillis(500);
     private Flux<String> sentenceFlux;
 
     public SentenceSourceProcessor() {
-        this(new BookSentenceExtractor());
+        this(new BookSentenceExtractor(), DEFAULT_INTERVAL);
     }
 
-    public SentenceSourceProcessor(SentenceSource sentenceSource) {
-        sentenceFlux = Flux.interval(Duration.ofMillis(500))
+    public SentenceSourceProcessor(SentenceSource sentenceSource, Duration interval) {
+        sentenceFlux = Flux.interval(interval)
                 .map(i -> sentenceSource.nextSentence());
     }
 

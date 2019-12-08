@@ -25,13 +25,9 @@ public class InsultGateway implements InsultSource {
                 .build();
     }
 
-    public CompletableFuture<String> getAnotherInsult() {
+    @Override
+    public CompletableFuture<String> nextInsultAsync() {
         return client.sendAsync(ANOTHER_INSULT_REQUEST, HttpResponse.BodyHandlers.ofString(Charset.defaultCharset()))
                 .thenApply(HttpResponse::body);
-    }
-
-    @Override
-    public String nextInsult() {
-        return null;
     }
 }

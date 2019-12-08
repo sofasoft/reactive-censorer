@@ -1,6 +1,8 @@
 package com.tt.reactive.source;
 
+import java.util.concurrent.CompletableFuture;
+
 public interface InsultSource extends DataSource {
 
-    String nextInsult();
+    CompletableFuture<String> nextInsultAsync();
 }

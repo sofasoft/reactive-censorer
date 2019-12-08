@@ -9,7 +9,7 @@ public class Main {
         InsultSourceProcessor insultSourceProcessor = new InsultSourceProcessor();
         SentenceSourceProcessor sentenceSourceProcessor = new SentenceSourceProcessor();
 
-        Flux.merge(insultSourceProcessor.getInsult(), sentenceSourceProcessor.getSentenceSource())
+        Flux.merge(insultSourceProcessor.getInsultSource(), sentenceSourceProcessor.getSentenceSource())
                 .subscribe(System.out::println);
 
         Thread.sleep(60000);

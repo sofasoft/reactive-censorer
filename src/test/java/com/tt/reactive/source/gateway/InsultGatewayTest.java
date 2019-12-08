@@ -1,6 +1,7 @@
 package com.tt.reactive.source.gateway;
 
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.CompletableFuture;
@@ -11,10 +12,10 @@ class InsultGatewayTest {
     void getAnotherInsultSimpleExample() {
         InsultGateway gateway = new InsultGateway();
 
-        CompletableFuture<String> anotherInsult = gateway.getAnotherInsult();
+        CompletableFuture<String> anotherInsult = gateway.nextInsultAsync();
 
         String result = anotherInsult.join();
-        assert result != null;
-        assert !result.isBlank();
+        Assertions.assertNotNull(result);
+        Assertions.assertFalse(result.isBlank());
     }
 }
