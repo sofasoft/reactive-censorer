@@ -1,21 +1,21 @@
-package com.tt.reactive;
+package com.tt.reactive.topology;
 
-import com.tt.reactive.gateway.InsultGateway;
+import com.tt.reactive.source.gateway.InsultGateway;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 
-public class InsultProcessor {
+public class InsultSourceProcessor {
 
     private final InsultGateway gateway;
     private final Flux<String> insultFlux;
 
-    public InsultProcessor() {
+    public InsultSourceProcessor() {
         this(new InsultGateway());
     }
 
-    public InsultProcessor(InsultGateway insultGateway) {
+    public InsultSourceProcessor(InsultGateway insultGateway) {
         this.gateway = insultGateway;
         insultFlux = Flux.interval(Duration.ofMillis(2100))
                 .flatMap(l -> Mono.fromFuture(gateway.getAnotherInsult()));

@@ -1,8 +1,6 @@
-package com.tt.reactive.io;
+package com.tt.reactive.source.io;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class BookSentenceExtractorTest {
 

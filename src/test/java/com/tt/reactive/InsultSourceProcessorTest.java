@@ -1,14 +1,14 @@
 package com.tt.reactive;
 
-import com.tt.reactive.InsultProcessor;
-import com.tt.reactive.gateway.InsultGateway;
+import com.tt.reactive.source.gateway.InsultGateway;
+import com.tt.reactive.topology.InsultSourceProcessor;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import reactor.test.StepVerifier;
 
 import java.util.concurrent.CompletableFuture;
 
-class InsultProcessorTest {
+class InsultSourceProcessorTest {
 
     @Test
     void getInsultSimpleExample() throws InterruptedException {
@@ -17,9 +17,9 @@ class InsultProcessorTest {
                 .thenReturn(CompletableFuture.supplyAsync(() -> "Some sentence1"))
                 .thenReturn(CompletableFuture.supplyAsync(() -> "Some sentence2"));
 
-        InsultProcessor insultProcessor = new InsultProcessor(mock);
+        InsultSourceProcessor insultSourceProcessor = new InsultSourceProcessor(mock);
 
-        StepVerifier.create(insultProcessor.getInsult().take(2))
+        StepVerifier.create(insultSourceProcessor.getInsult().take(2))
                 .expectNext("Some sentence1")
                 .expectNext("Some sentence2")
                 .verifyComplete();
