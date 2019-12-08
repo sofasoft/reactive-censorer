@@ -1,4 +1,6 @@
-package com.tt.reactive.gateway;
+package com.tt.reactive.source.gateway;
+
+import com.tt.reactive.source.InsultSource;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -8,7 +10,7 @@ import java.nio.charset.Charset;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 
-public class InsultGateway {
+public class InsultGateway implements InsultSource {
 
     private static final int N_THREADS = 4;
     private static final HttpRequest ANOTHER_INSULT_REQUEST = HttpRequest.newBuilder()
@@ -23,7 +25,8 @@ public class InsultGateway {
                 .build();
     }
 
-    public CompletableFuture<String> getAnotherInsult() {
+    @Override
+    public CompletableFuture<String> nextInsultAsync() {
         return client.sendAsync(ANOTHER_INSULT_REQUEST, HttpResponse.BodyHandlers.ofString(Charset.defaultCharset()))
                 .thenApply(HttpResponse::body);
     }

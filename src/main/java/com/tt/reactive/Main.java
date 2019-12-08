@@ -1,9 +1,16 @@
 package com.tt.reactive;
 
+import com.tt.reactive.topology.InsultSourceProcessor;
+import com.tt.reactive.topology.SentenceSourceProcessor;
+import reactor.core.publisher.Flux;
+
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        InsultProcessor insultProcessor = new InsultProcessor();
-        insultProcessor.getInsult().subscribe(System.out::println);
+        InsultSourceProcessor insultSourceProcessor = new InsultSourceProcessor();
+        SentenceSourceProcessor sentenceSourceProcessor = new SentenceSourceProcessor();
+
+        Flux.merge(insultSourceProcessor.getInsultSource(), sentenceSourceProcessor.getSentenceSource())
+                .subscribe(System.out::println);
 
         Thread.sleep(60000);
     }
