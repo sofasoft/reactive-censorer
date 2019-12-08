@@ -7,27 +7,38 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.Charset;
+import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 
 public class InsultGateway implements InsultSource {
 
-    private static final int N_THREADS = 4;
-    private static final HttpRequest ANOTHER_INSULT_REQUEST = HttpRequest.newBuilder()
-            .uri(URI.create("https://evilinsult.com/generate_insult.php?lang=en"))
-            .build();
-
+    private final HttpRequest anotherInsultRequest;
     private final HttpClient client;
 
     public InsultGateway() {
+        this(
+                URI.create("https://evilinsult.com/generate_insult.php?lang=en"),
+                4,
+                Duration.ofMillis(2000),
+                Duration.ofMillis(10000));
+    }
+
+    public InsultGateway(URI uri, int nThreads, Duration timeout, Duration connectionTimeout) {
+        anotherInsultRequest = HttpRequest.newBuilder()
+                .uri(uri)
+                .timeout(timeout)
+                .build();
+
         client = HttpClient.newBuilder()
-                .executor(Executors.newFixedThreadPool(N_THREADS))
+                .executor(Executors.newFixedThreadPool(nThreads))
+                .connectTimeout(connectionTimeout)
                 .build();
     }
 
     @Override
     public CompletableFuture<String> nextInsultAsync() {
-        return client.sendAsync(ANOTHER_INSULT_REQUEST, HttpResponse.BodyHandlers.ofString(Charset.defaultCharset()))
+        return client.sendAsync(anotherInsultRequest, HttpResponse.BodyHandlers.ofString(Charset.defaultCharset()))
                 .thenApply(HttpResponse::body);
     }
 }
