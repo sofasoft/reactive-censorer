@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.CompletableFuture;
 
+//todo wiremock
+//todo badly path tests
 class InsultGatewayTest {
 
     @Test
