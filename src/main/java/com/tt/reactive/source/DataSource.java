@@ -1,4 +1,8 @@
 package com.tt.reactive.source;
 
-public interface DataSource {
+import java.util.concurrent.CompletableFuture;
+
+public interface DataSource<T> {
+    CompletableFuture<T> nextAsync();
+    T next();
 }

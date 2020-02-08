@@ -19,7 +19,7 @@ public class InsultSourceProcessor {
     public InsultSourceProcessor(InsultGateway insultGateway, Duration interval) {
         this.gateway = insultGateway;
         insultFlux = Flux.interval(interval)
-                .flatMap(l -> Mono.fromFuture(gateway.nextInsultAsync()));
+                .flatMap(l -> Mono.fromFuture(gateway.nextAsync()));
     }
 
     public Flux<String> getInsultSource() {

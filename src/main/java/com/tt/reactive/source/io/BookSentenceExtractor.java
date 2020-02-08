@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
 
 public class BookSentenceExtractor implements SentenceSource {
 
@@ -36,7 +37,13 @@ public class BookSentenceExtractor implements SentenceSource {
         size = lines.size();
     }
 
-    public String nextSentence() {
+    @Override
+    public CompletableFuture<String> nextAsync() {
+        return CompletableFuture.completedFuture(lines.get(random.nextInt(size)));
+    }
+
+    @Override
+    public String next() {
         return lines.get(random.nextInt(size));
     }
 }
