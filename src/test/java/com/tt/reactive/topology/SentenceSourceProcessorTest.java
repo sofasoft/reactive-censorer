@@ -17,7 +17,7 @@ class SentenceSourceProcessorTest {
         String expectedSentence1 = "First sentence";
         String expectedSentence2 = "Second Sentence";
 
-        Mockito.when(mock.nextSentence())
+        Mockito.when(mock.next())
                 .thenReturn(expectedSentence1)
                 .thenReturn(expectedSentence2);
 

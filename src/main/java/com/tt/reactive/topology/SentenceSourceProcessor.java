@@ -17,7 +17,7 @@ public class SentenceSourceProcessor {
 
     public SentenceSourceProcessor(SentenceSource sentenceSource, Duration interval) {
         sentenceFlux = Flux.interval(interval)
-                .map(i -> sentenceSource.nextSentence());
+                .map(i -> sentenceSource.next());
     }
 
     public Flux<String> getSentenceSource() {

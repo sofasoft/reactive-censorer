@@ -17,7 +17,7 @@ class InsultSourceProcessorTest {
         String expectedInsult1 = "Some sentence1";
         String expectedInsult2 = "Some sentence2";
 
-        Mockito.when(mock.nextInsultAsync())
+        Mockito.when(mock.nextAsync())
                 .thenReturn(CompletableFuture.supplyAsync(() -> expectedInsult1))
                 .thenReturn(CompletableFuture.supplyAsync(() -> expectedInsult2));
 

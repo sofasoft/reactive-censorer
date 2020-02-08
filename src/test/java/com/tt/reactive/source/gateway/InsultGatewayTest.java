@@ -14,7 +14,7 @@ class InsultGatewayTest {
     void getAnotherInsultSimpleExample() {
         InsultGateway gateway = new InsultGateway();
 
-        CompletableFuture<String> anotherInsult = gateway.nextInsultAsync();
+        CompletableFuture<String> anotherInsult = gateway.nextAsync();
 
         String result = anotherInsult.join();
         Assertions.assertNotNull(result);

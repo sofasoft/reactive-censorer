@@ -10,12 +10,12 @@ class BookSentenceExtractorTest {
     @Test
     void nextSentence() {
         SentenceSource extractor = new BookSentenceExtractor();
-        String sentence1 = extractor.nextSentence();
+        String sentence1 = extractor.next();
 
         Assertions.assertNotNull(sentence1);
         Assertions.assertFalse(sentence1.isBlank());
 
-        String sentence2 = extractor.nextSentence();
+        String sentence2 = extractor.next();
 
         Assertions.assertNotNull(sentence2);
         Assertions.assertFalse(sentence2.isBlank());
